@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>London, Ontario Weather</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f4f6f8;
+      display: grid;
+      min-height: 100vh;
+      place-items: center;
+    }
+    .wrap {
+      width: min(100% - 2rem, 900px);
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.10);
+      padding: 1rem;
+    }
+    h1 {
+      margin: .25rem 0 .75rem;
+      font-weight: 600;
+      font-size: clamp(1.1rem, 1.2vw + .9rem, 1.6rem);
+      color: #111827;
+    }
+    .widget-slot {
+      min-height: 240px; /* ensures visible space before JS loads */
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .fallback {
+      font-size: .95rem;
+      color: #374151;
+    }
+    .fallback a {
+      color: #2563eb;
+      text-decoration: underline;
+    }
+    @media (prefers-color-scheme: dark) {
+      .wrap { background: #0b0f14; }
+      h1 { color: #e5e7eb; }
+      .fallback { color: #d1d5db; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <h1>Weather — London, Ontario</h1>
+    <div class="widget-slot">
+      <a class="weatherwidget-io"
+         href="https://forecast7.com/en/42d98n81d25/london/"
+         data-label_1="LONDON"
+         data-label_2="Ontario"
+         data-icons="Climacons Animated"
+         data-days="5"
+         data-theme="original">
+         LONDON Ontario
+      </a>
+      <noscript class="fallback">
+        JavaScript is required to load the widget. View the forecast at
+        <a href="https://forecast7.com/en/42d98n81d25/london/" target="_blank" rel="noopener">forecast7.com</a>.
+      </noscript>
+    </div>
+  </main>
+
+  <!-- Direct include is often more reliable on static hosts -->
+  <script id="weatherwidget-io-js" src="https://weatherwidget.io/js/widget.min.js"></script>
+  <script>
+    // Ensure the widget initializes after the script loads
+    document.addEventListener("DOMContentLoaded", function() {
+      if (typeof __weatherwidget_init === "function") {
+        try { __weatherwidget_init(); } catch (e) { console.error(e); }
+      } else {
+        // If script hasn't finished loading yet, try again shortly
+        var tries = 0;
+        var timer = setInterval(function(){
+          if (typeof __weatherwidget_init === "function") {
+            try { __weatherwidget_init(); } catch (e) { console.error(e); }
+            clearInterval(timer);
+          }
+          if (++tries > 20) clearInterval(timer); // ~2s
+        }, 100);
+      }
+    });
+  </script>
+</body>
+</html>
