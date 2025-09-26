@@ -3,31 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Fullscreen YouTube Embed</title>
+  <title>Trackunit Orbit</title>
   <style>
-    html, body {
+    body {
       margin: 0;
-      height: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #ffffff, #f3f4f6);
       overflow: hidden;
-      background: #000;
     }
-    iframe {
+    .center-logo {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
+      width: 200px;
+      z-index: 2;
+      animation: pulse 4s infinite ease-in-out;
+    }
+    .orbit {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      animation: spin 40s linear infinite;
+    }
+    .orbit img {
+      position: absolute;
+      width: 120px;
+      height: auto;
+      top: 50%;
+      left: 50%;
+      margin: -60px; /* half of width to center */
+    }
+    .orbit img:nth-child(1) { transform: rotate(0deg) translate(240px) rotate(0deg); }
+    .orbit img:nth-child(2) { transform: rotate(40deg) translate(240px) rotate(-40deg); }
+    .orbit img:nth-child(3) { transform: rotate(80deg) translate(240px) rotate(-80deg); }
+    .orbit img:nth-child(4) { transform: rotate(120deg) translate(240px) rotate(-120deg); }
+    .orbit img:nth-child(5) { transform: rotate(160deg) translate(240px) rotate(-160deg); }
+    .orbit img:nth-child(6) { transform: rotate(200deg) translate(240px) rotate(-200deg); }
+    .orbit img:nth-child(7) { transform: rotate(240deg) translate(240px) rotate(-240deg); }
+    .orbit img:nth-child(8) { transform: rotate(280deg) translate(240px) rotate(-280deg); }
+    .orbit img:nth-child(9) { transform: rotate(320deg) translate(240px) rotate(-320deg); }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
   </style>
 </head>
 <body>
-  <iframe
-    src="https://www.youtube-nocookie.com/embed/-bRe5ercRaQ?si=UpztIy8CTY0nfJOj&amp;controls=0&autoplay=1&mute=1&loop=1"
-    title="YouTube video player"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    referrerpolicy="strict-origin-when-cross-origin"
-    allowfullscreen>
-  </iframe>
+  <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" 
+       alt="Trackunit Logo" class="center-logo" />
+  <div class="orbit">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+    <img src="https://trackunit.com/wp-content/uploads/2022/06/trackunit_logotype_rgb_red.png" alt="Trackunit Logo">
+  </div>
 </body>
 </html>
